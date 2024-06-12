@@ -1,0 +1,15 @@
+
+#Alpha{
+    height: 200px;
+    width: 200px;
+    background-color: rgba(255, 0 , 0 , 0.5);
+}
+
+#opacity{
+
+    height: 200px;
+    width: 200px;
+    background-color: #4dff00ff;
+    opacity: 0.5;
+}
+

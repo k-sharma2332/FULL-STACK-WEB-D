@@ -1,0 +1,36 @@
+section {
+    margin-top: 100px;
+}
+div {
+    width: 200px;
+    height: 50px;
+    text-align: center;
+    background-color: green;
+    border: 2px solid black;
+    margin: 10px;
+}
+div:nth-of-type(2n) {
+    background-color: #f2db6a;
+}
+div:nth-of-type(3n) {
+    background-color: #ebb02d;
+}
+/* transform-rotate*/
+#one{
+    transform:rotate(45deg);
+}
+/* transform-scale*/
+#two{
+    transform: scaleX( 0.5);
+}
+/*transform-translate*/
+#three{
+    transform: translateX(100px);
+}
+/*transform-skew*/
+#four{
+    transform: skew(30deg);
+}
+#five{
+    transform:rotate(30deg) translateX(150px);
+}
