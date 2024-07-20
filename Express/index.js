@@ -18,21 +18,33 @@ const express = require("express");
 //     color: "red",
 
 //    });
-//  });
-app.get("/",(req , res)=>
-{
-  res.send("you contacted root path");
-}
-)
-app.get("/apple",(req , res)=>
-  {
-    res.send("you contacted root path");
-  }
-  );
+ // });
+// app.get("/",(req , res)=>
+// {
+//   res.send("you contacted root path");
+// }
+// )
+// app.get("/apple",(req , res)=>
+//   {
+//     res.send("hello , i am root ");
+//   }
+//   );
 
-  app.get("*",(req,res)=>{
-  res.send("this path is not define")});
+//   app.get("*",(req,res)=>{
+//   res.send("this path is not define")});
 
-  app.post("/",(req,res) => {
-    res.send("you sent a post request")
-  });
+//   app.post("/",(req,res) => {
+//     res.send("you sent a post request")
+//   });
+
+  app.get("/:username/:id",(req , res)=>
+    {
+     let {username,id}= req.params;
+    
+      res.send(`welcome to the page of @${username}.`);
+    }
+    );
+    app.get("/search",(req,res) => {
+      let {q } = req.query;
+      res.send(`search result for query ${q}`);
+    });
