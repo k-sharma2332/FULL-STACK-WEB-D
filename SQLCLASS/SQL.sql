@@ -48,7 +48,7 @@ VALUES
 SELECT age , max(followers)
 FROM user
 GROUP BY age
-HAVING max(followers)>200
+HAVING max(followers)>200cv
 ORDER BY age DESC;
 
 
