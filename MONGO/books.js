@@ -40,7 +40,7 @@ Book.findByIdAndUpdate("66b8df3c99f5da417ac9534b" , {price: -500},{runValidators
 .then((res) => {
     console.log(res);
 }).catch((err) =>{
-    console.log(err.errors.price.properties.message/);
+    console.log(err.errors.price.properties.message);
 });
 
 // let book1 = new Book({
