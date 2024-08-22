@@ -98,6 +98,16 @@ body {
 }
 
 /* Edit Page */
-.edit-bt {
+.edit-btn {
     background-color: #fe424d;
+    border: none !important;
+}
+
+/* Show page */
+.show-img{
+    height: 30vh;
+}
+
+.btns {
+    display: flex;
 }

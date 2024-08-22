@@ -1,32 +1,31 @@
-const mongoose =require("mongoose");
+const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-
-const defaultImage =  "https://unsplash.com/photos/a-view-of-a-waterfall-from-inside-a-cave-jYF1kn3eyHo" ;
+const defaultImage = "https://unsplash.com/photos/a-view-of-a-waterfall-from-inside-a-cave-jYF1kn3eyHo";
 
 const listingSchema = new Schema({
-    title:{
-        type:String,
-        require:true,
+    title: {
+        type: String,
+        require: true,
     },
-    description : {
-        type : String
+    description: {
+        type: String
     },
     image: {
-        url : {
-            type : String,
-            set: (link) => link === "" ? defaultImage : link,
-            default : defaultImage
-        },
-        filename : String
+        type: String,
+        default: defaultImage,
+        set: (link) => link === "" ? defaultImage : link,
     },
-    price : {
-        type : Number
+    price: {
+        type: Number
     },
     location: {
         type: String
     },
+    country : {
+        type: String
+    }
 });
 
-const Listing = mongoose.model("Listing",listingSchema);
+const Listing = mongoose.model("Listing", listingSchema);
 module.exports = Listing;
