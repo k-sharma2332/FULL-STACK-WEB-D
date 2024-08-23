@@ -1,5 +1,15 @@
 const express = require("express");
 const app = express();
+const ExpressError = require("./ExpressError");
+
+
+const checkToken = (req, res, next) => {
+    let { token } = req.query;
+    if (token == "giveaccess") {
+        next();
+    }
+    throw new ExpressError( 401 , "ACCESS DENIED");
+};
 
 // app.use((req,res,next) => {
 //     console.log("Hi , I am  1st middleware");
@@ -15,17 +25,15 @@ app.use("/random", (req, res, next) => {
     console.log("I am only for random");
 });
 
+
 // app.get("/wrong",(req,res) => {
 //     abcd = abcd;
 // });
+app.use((err,req,res,next) => {
+    console.log("--------Error-----------");
+    next(err);
+});
 
-const checkToken = (req, res, next) => {
-    let { token } = req.query;
-    if (token == "giveaccess") {
-        next();
-    }
-    throw new error("ACCESS DENIED");
-};
 
 app.get("/api", checkToken, (req, res) => {
     res.send("data")

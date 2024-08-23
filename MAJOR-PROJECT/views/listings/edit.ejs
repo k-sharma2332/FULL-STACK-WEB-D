@@ -3,27 +3,37 @@
     <div class="row mt03">
         <div class="col-8 offset-2">
         </div>
-        <form method="post" action="/listings/<%=listing._id%>?_method=patch">
+        <form method="post" action="/listings/<%=listing._id%>?_method=patch" novalidate class="needs-validation">
 
             <div class="mg-3"><label for="title" class="form-label">Title</label>
-                <input name="listing[title]" value="<%=listing.title %>" type="text" class="form-control">
+                <input name="listing[title]" value="<%=listing.title %>" type="text" class="form-control" required>
+                <div class="valid-feedback">Title looks good!</div>
             </div>
             <div class="mg-3"><label for="description" class="form-label">Description</label>
-                <input name="listing[description]" value="<%= listing.description %>" type="text" class="form-control">
+                <input name="listing[description]" value="<%= listing.description %>" type="text" class="form-control"
+                    required>
+                <div class="invalid-feedback">Please enter a short Description</div>
             </div>
             <div class="mg-3"><label for="image" class="form-label">Enter Image link</label>
-                <input name="listing[image]" value="<%= listing.image %>" type="text" class="form-control">
+                <input name="listing[image]" value="<%= listing.image %>" type="text" class="form-control" required>
+                <div class="invalid-feedback">Please enter valid Image link</div>
             </div>
             <div class="row">
-            <div class="mg-3 col-md-8" ><label for="price" class="form-label">Enter Price</label>
-                <input name="listing[price]" value="<%=listing.price %>" type="number" class="form-control">
+                <div class="mg-3 col-md-8"><label for="price" class="form-label">Enter Price</label>
+                    <input name="listing[price]" value="<%=listing.price %>" type="number" class="form-control"
+                        required>
+                    <div class="invalid-feedback">Please enter valid Price</div>
+                </div>
+                <div class="mg-3 col-md-8"><label for="country" class="form-label">Enter Country</label>
+                    <input name="listing[country]" value="<%= listing.country %>" type="text" class="form-control"
+                        required>
+                    <div class="invalid-feedback">Please enter valid Country name</div>
+                </div>
             </div>
-            <div class="mg-3 col-md-8"><label for="country" class="form-label">Enter Country</label>
-                <input name="listing[country]" value="<%= listing.country %>" type="text" class="form-control">
-            </div>
-        </div>
             <div class="mg-3"><label for="location" class="form-label">Enter Location</label>
-                <input name="listing[location]" value="<%= listing.location %>" type="text" class="form-control">
+                <input name="listing[location]" value="<%= listing.location %>" type="text" class="form-control"
+                    required>
+                <div class="invalid-feedback">Please enter valid Location</div>
             </div>
             <br><br>
             <button class="btn btn-dark edit-btn mt-3" type="submit"> Submit </button>
@@ -32,3 +42,4 @@
         </form>
     </div>
     </div>
+    <script src="/js/script.js"></script>
