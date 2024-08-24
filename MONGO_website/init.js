@@ -14,59 +14,44 @@ async function main(){
 
 let Chats = [
     {
-        From : "Akshat",
+        From : "Khushi",
         To : "Kirti",
-        Message : "Movie Dekhne Chalega......",
+        Message : "Hey!",
         CreatedAt : new Date()
     },
     {
-        From : "Krit",
-        To : "Shashikant",
-        Message : "Deadpool Dekhega",
+        From : "Veer",
+        To : "Shreyas",
+        Message : "Send me your pic",
         CreatedAt : new Date()
     },
     {
-        From : "Shashikant",
-        To : "Krit",
-        Message : "Nhi, Tuuu Ja Mene Dekhleee",
+        From : "sheryas",
+        To : "Kriti",
+        Message : "What's going on bro!",
         CreatedAt : new Date()
     },
     {
-        From : "Neha",
-        To : "Preeti",
-        Message : "Tu Abhi Kiske Saath Ha, Tum Dono Ko Tere Papa Ne Dekh Liya ",
-        CreatedAt : new Date()
-    },
-    {
-        From : "Rohit",
-        To : "Mohit",
-        Message : "Abbe Ye Kya H, Ball Thoda Short Rakhn Na",
-        CreatedAt : new Date()
-    },
-    {
-        From : "Rohit",
+        From : "Ruhi",
         To : "Virat",
-        Message : "Dhoni Bhai Kah Rahe, Trophy To Jeet Gye Ha Abb Jaldi Retirement Lee Loo",
+        Message : "Send me your id ",
         CreatedAt : new Date()
     },
+    
     {
-        From : "Kohli",
-        To : "Rohit",
-        Message : "Vaase Baat To Sahe Ha, Kam See Kam Kahe See To Gautam Se Peecha Chute....",
+        From : "Veer",
+        To : "Virat",
+        Message : "Hey! dude",
         CreatedAt : new Date()
     },
+    
     {
-        From : "Thor",
-        To : "Thanos's Army",
-        Message : "Bring Me Thanos!!!!",
+        From : "Smriti",
+        To : "Ritik",
+        Message : "Hey!",
         CreatedAt : new Date()
     },
-    {
-        From : "Deadpool",
-        To : "MCU",
-        Message : "Why Was Thor Crying?????",
-        CreatedAt : new Date()
-    }
+   
 ];
 
 Chat.insertMany(Chats).then((result) => {
