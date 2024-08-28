@@ -1,4 +1,4 @@
-body {
+.body {
     font-family: "Plus Jakarta Sans", sans-serif;
     display: flex;
     flex-direction: column;
@@ -58,7 +58,7 @@ body {
 }
 
 /* Cards */
-.card{
+.listing-card{
     border: none !important;
     margin-bottom: 2rem;
 }
@@ -108,8 +108,24 @@ body {
     height: 30vh;
 }
 
+
 .btns {
     display: flex;
    
 }
 
+.ed-btn{
+    
+        color:white ;
+        background-color: #da0e1c !important;
+        border: #222222 2px !important;
+        border-radius: 5px;
+}
+
+.dl-btn{
+   
+    color: white;
+    background-color: black !important;
+    border: solid black  2px !important;
+    border-radius: 5px;   
+}
