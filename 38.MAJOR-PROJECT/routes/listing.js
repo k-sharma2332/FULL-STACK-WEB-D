@@ -1,83 +1,72 @@
-const express = require("express");
+const express = require(`express`);
 const router = express.Router();
-const wrapAsync = require("../utils/wrapAsync.js");
-const ExpressError = require("../utils/ExpressError.js");
-const { listingSchema  } = require("../schema.js");
-const Listing = require("../models/listing.js");
+const Listing = require(`../models/listing.js`);
+const wrapAsync = require(`../utils/wrapAsync.js`);
+const { isLoggedIn, isOwner , validateListings} = require(`../middlewares.js`);
 
 
 
-const validateListing = (req,res,next) => {
-    let {error} = listingSchema.validate(req.body);
-    
-      if(error) {
-        let errMsg = error.details.map((el) => el.message.join(","));
-        throw new ExpressError(400, error);
-      }
-      else {
-        next();
-      }
-};
+
+// 01. Index Route : Getting Titles Of All The Available Listings  
+router.get(`/`, wrapAsync(async (req, res, next) => {
+    let result = await Listing.find({});
+    res.render(`listings/index.ejs`, { result });
+}));
 
 
-
-// Index route
-router.get("/",wrapAsync(async(req,res) =>{
-    const allListings = await Listing.find({});
-        res.render("listings/index.ejs",{allListings});
-  }));
-
-// New route
-router.get("/new",(req,res) =>{
-    res.render("listings/new.ejs")
+// 02. New And Create Route : Adding A New Listing To Our Data
+router.get(`/new`, isLoggedIn, (req, res) => {
+    res.render('listings/newListing.ejs');
 });
-
-// Show route
-router.get("/:id",wrapAsync(async(req,res) =>{
-    let {id} = req.params;
-    const listing = await Listing.findById(id).populate("reviews");
-    res.render("listings/show.ejs",{listing});
+router.post(``, isLoggedIn, validateListings, wrapAsync(async (req, res, next) => {
+    const newListing = new Listing(req.body.listing);
+    newListing.owner = res.locals.user._id;
+    await newListing.save();
+    req.flash("success", "New Listing Created!");
+    res.redirect(`/listings`);
 }));
 
-// Create route
-router.post("/",validateListing,
-     wrapAsync(async(req,res,next) => {
-      let result = listingSchema.validate(req.body);
-      console.log(result);
-      if(result.error) {
-        throw new ExpressError(400, result.error);
-      }
-        const newListing = new Listing(req.body.listing);
-        await newListing.save();
-        res.redirect("/listings");
-    })
-);
 
-
-// Edit route
-router.post("/:id/edit",wrapAsync(async(req,res) => {
-    let {id} = req.params;
-    const listing = await Listing.findById(id);
+// 03. Show Route : Getting All The Details Of The Selected Listing
+router.get('/:id', wrapAsync(async (req, res, next) => {
+    const { id } = req.params;
+    let listing = await Listing.findById(id).populate({path:"reviews", populate: {
+        path: "author",
+    },
+}).populate("owner");
     console.log(listing);
-    res.render("listings/edit.ejs",{listing});
-}));
-
-// Update route
-router.patch("/:id",validateListing, wrapAsync(async(req,res) => {
-    if(!req.body.listing) {
-        throw new ExpressError(400, "Send valid data for listing")
+    if (!listing) {
+        req.flash(`error`, `The Requested Listing Doesn't Exists!`);
+        res.redirect(`/listings`);
     }
-    let {id} = req.params;
-   await Listing.findByIdAndUpdate(id,{...req.body.listing});
-   res.redirect(`/listings/${id}`);
+    res.render(`listings/show.ejs`, { listing });
 }));
 
-// Delete route
-router.delete("/:id", wrapAsync(async(req,res) => {
-    let { id } = req.params;
-   let deletedListing= await Listing.findByIdAndDelete(id);
-   console.log(deletedListing);
-   res.redirect("/listings");
+
+// 04. Edit And Update Route : Changing The Values Of The Existing Listings
+router.get(`/:id/edit`, isLoggedIn, wrapAsync(async (req, res, next) => {
+    const { id } = req.params;
+    let listing = await Listing.findById(id);
+    if (!listing) {
+        req.flash(`error`, `The Requested Listing Doesn't Exists!`);
+        res.redirect(`/listings`);
+    }
+    res.render(`listings/update.ejs`, { listing });
+}));
+router.put(`/:id`, isLoggedIn, isOwner, validateListings, wrapAsync(async (req, res, next) => {
+    const { id } = req.params;
+    await Listing.findByIdAndUpdate(id, req.body.listing);
+    req.flash("success", "Updated Requested Listing!");
+    res.redirect(`/listings/${id}`);
+}));
+
+
+// 05. Delete Route : Deleting An Already Existing Listing Along With Its All Related Reviews
+router.delete('/:id', isLoggedIn, wrapAsync(async (req, res, next) => {
+    const { id } = req.params;
+    await Listing.findByIdAndDelete(id)
+    req.flash("success", "Requested Listing Deleted!");
+    res.redirect(`/listings`);
 }));
 
 module.exports = router;

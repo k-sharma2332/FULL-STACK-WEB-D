@@ -1,47 +1,50 @@
-const mongoose = require("mongoose");
+const mongoose = require(`mongoose`);
+const Review = require(`./review.js`)
 const Schema = mongoose.Schema;
-const Review = require("./review.js");
-
-
-const defaultImage = "https://unsplash.com/photos/a-view-of-a-waterfall-from-inside-a-cave-jYF1kn3eyHo";
+const defaultImage = 
+"https://images.unsplash.com/photo-1625505826533-5c80aca7d157?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fGdvYXxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=800&q=60";
 
 const listingSchema = new Schema({
-    title: {
-        type: String,
-        require: true,
+    title : {
+        type : String,
+        required : true
     },
-    description: {
-        type: String
+    description : {
+        type : String,
+        required : true
     },
-    image: {
-        type: String,
-        default: defaultImage,
-        set: (link) => link === "" ? defaultImage : link,
+    image :{
+            type : String,
+            set: (link) => link === "" ? defaultImage : link,
+            default : defaultImage
     },
-    price: {
-        type: Number
+    price : {
+        type : Number,
+        required : true
     },
-    location: {
-        type: String
+    location : {
+        type : String,
+        required : true
     },
-    country: {
-        type: String
+    country : {
+        type : String,
+        required : true
     },
-    reviews: [{
-        type: Schema.Types.ObjectId,
-        ref: "Review",
+    reviews : [{
+        type : Schema.Types.ObjectId,
+        ref : "Review"
     }],
-});
-
-listingSchema.post("findOneAndDelete", async (listing) => {
-    if (listing) {
-        await Review.deleteMany({ _id: { $in: listing.reviews } });
-    }
-
+    owner: {
+        type: Schema.Types.ObjectId,
+        ref:"User",
+    },
 });
 
 
-
+// Mongoose Middleware for Deleting All The Reviews In Case The Parent Listing Is Deleted.
+listingSchema.post(`findOneAndDelete`, async (listing) => {
+    if (listing) await Review.deleteMany({_id : {$in : listing.reviews}});
+});
 
 const Listing = mongoose.model("Listing", listingSchema);
 module.exports = Listing;
