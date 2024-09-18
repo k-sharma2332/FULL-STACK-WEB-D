@@ -23,7 +23,7 @@ const sessionOptions = {
         maxAge : 7 * 24 * 60 * 1000,
         httpOnly : true,
     },
-};
+}
 
 app.set("views", path.join(__dirname,"views"));
 app.set("view engine", "ejs");
@@ -79,5 +79,6 @@ app.all("*", (req, res, next) => {
 app.use((err, req, res, next) => {
     let {statusCode = 500, message = "Encountered Some Error!"} = err;
     console.log(`\nError Encounered!!! \n${message}!!!`);
+    console.log(err);
     res.status(statusCode).render("error.ejs", {err});
 });
