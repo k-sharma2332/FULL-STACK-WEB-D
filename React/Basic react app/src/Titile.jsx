@@ -1,5 +1,5 @@
 
-let name = "Khusic";
+let name = "Khushi";
 
 function Title() {
     return ( 
