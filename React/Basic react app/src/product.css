@@ -1,4 +1,5 @@
-.Product {
-    border: 1px solid white;
-    border-radius: 20px;
+.Product{
+    border: 0.75px solid rgba(255, 255, 255, 0.5);
+    padding: 0.5rem;
+    border-radius: 1rem;
 }

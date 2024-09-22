@@ -1,14 +1,14 @@
 
+let name = "Khusic";
 
 function Title() {
-    let name = "khushi"
-    return (
-        <div>
-            <p> 2 * 2 = {2 * 2}</p>
-            <p>Hi, {name.uppperCase()}</p>
-        </div>
+    return ( 
+    <>
+        <h3> Hi, {name.toUpperCase()} </h3>
+    </>
     );
-  }
+}
 
- export default Title;
-// export{Title}
+export {Title};
+
+// With Curly Braces We Can Write Pure JavaScript Code Inside Our JSX Files. 

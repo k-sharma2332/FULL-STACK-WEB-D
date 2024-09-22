@@ -1,12 +1,13 @@
-import Product from "./product.jsx";
+import {Product} from "./Product.jsx"
 
 function ProductTab() {
-    return(
+    return (
         <>
-         <Product/>
-         <Product/>
+            <Product /><br />
+            <Product /><br />
+            <Product /><br />
         </>
     );
-}
+};
 
-export default ProductTab;
+export {ProductTab};
