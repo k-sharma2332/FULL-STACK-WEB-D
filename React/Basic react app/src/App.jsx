@@ -1,11 +1,11 @@
 import "./App.css"
-import {Title} from "./Title.jsx"
 import {ProductTab} from "./ProductTab.jsx"
 
 function App() {
   return (
     // React Fragements => Tag With No Name
     <>
+     <h2>Blockbuster Deals | Shop now</h2>
       <Title /><br />
       <ProductTab />
     </>
