@@ -1,8 +1,9 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+body>*{
   text-align: center;
+  margin: 0px auto;
 }
 
-/* In React : Theer Is Diffrent CSS File For All Components */
+.App{
+  position: relative;
+  top: -16vh;
+}
