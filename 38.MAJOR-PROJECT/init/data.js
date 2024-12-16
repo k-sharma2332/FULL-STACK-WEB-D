@@ -199,7 +199,7 @@ const sampleListings = [
     price: 2500,
     location: "Mykonos",
     country: "Greece",
-  },
+  },/9
   {
     title: "Eco-Friendly Treehouse Retreat",
     description:
