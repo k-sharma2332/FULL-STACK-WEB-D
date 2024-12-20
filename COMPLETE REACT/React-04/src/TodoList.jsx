@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from "uuid";
 export function TodoList(){
     let [todos, setTodos] = useState([{task : "Sample Task", id : uuidv4(), isDone : false}]); // Array For TodoList's Tasks
     let [newTodo, setNewTodo] = useState("");     // NewTask Having Input's Value
-    let addNewTask = () => {                     // Adding NewTask In Toto List
+    let addNewTask = () => {                     // Adding NewTask In Todo List
         console.log(`New Task Entered\n`);
         setTodos((prevTodo) => {
             return [...prevTodo, {task : newTodo, id:uuidv4(), isDone : false}]
