@@ -28,4 +28,4 @@ useEffect(function printSomething() {
         </div>
     )
 }  
-// The useEffect Is Used To Perform Some Tasks Every Single Time The Component Is Rendered Or Its State Is Changed.`
+// The useEffect Is Used To Perform Some Tasks Every Single Time The Component Is Rendered Or Its State Is Changed.
